@@ -35,6 +35,8 @@ namespace игра
                 backGround1.Left = 0;
                 backGround2.Left = backGround1.Right;
             }
+            int testGit = 0;
+            int testGit1 = 0;
         }
     }
 }
