@@ -30,25 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.player = new System.Windows.Forms.PictureBox();
             this.backGround2 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.backGround1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backGround2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backGround1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // player
-            // 
-            this.player.BackColor = System.Drawing.Color.Transparent;
-            this.player.Image = ((System.Drawing.Image)(resources.GetObject("player.Image")));
-            this.player.Location = new System.Drawing.Point(77, 375);
-            this.player.Name = "player";
-            this.player.Size = new System.Drawing.Size(90, 62);
-            this.player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.player.TabIndex = 2;
-            this.player.TabStop = false;
             // 
             // backGround2
             // 
@@ -83,15 +70,15 @@
             this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(512, 512);
-            this.Controls.Add(this.player);
             this.Controls.Add(this.backGround2);
             this.Controls.Add(this.backGround1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Form1";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
-            ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.backGround2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.backGround1)).EndInit();
             this.ResumeLayout(false);
@@ -99,7 +86,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.PictureBox player;
         private System.Windows.Forms.PictureBox backGround2;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox backGround1;
