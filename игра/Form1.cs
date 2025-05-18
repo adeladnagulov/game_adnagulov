@@ -15,16 +15,18 @@ namespace игра
 {
     public partial class Form1 : Form
     {
-        Player player;
+        private Player player;
+        private Background bg1;
+        private Background bg2;
 
         public Form1()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
+            this.ClientSize = new Size(800, 600);
             Init();
             Invalidate();
 
-            backGround1.SendToBack();
-            backGround2.SendToBack();
             /*
             initialTop = player.Top;
             Timer jumpTimer = new Timer();
@@ -36,13 +38,28 @@ namespace игра
 
         public void Init()
         {
+            string bgPath = "C:\\Users\\adela\\OneDrive\\Desktop\\работы\\С шарп\\игра\\игра\\background.jpg";
+
+            bg1 = new Background(0, 0, this.ClientSize.Width, this.ClientSize.Height, bgPath);
+            bg2 = new Background(this.ClientSize.Width, 0, this.ClientSize.Width, this.ClientSize.Height, bgPath);
             player = new Player(77, 375);
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
-            g.DrawImage(player.playerImg, player.x, player.y, player.size, player.size);
+            e.Graphics.DrawImage(
+                bg1.BackgroundImage,
+                new Rectangle(bg1.X, bg1.Y, bg1.Width, bg1.Height),
+                new Rectangle(0, 0, bg1.BackgroundImage.Width, bg1.BackgroundImage.Height),
+                GraphicsUnit.Pixel);
+
+            e.Graphics.DrawImage(
+                bg2.BackgroundImage,
+                new Rectangle(bg2.X, bg2.Y, bg2.Width, bg2.Height),
+                new Rectangle(0, 0, bg2.BackgroundImage.Width, bg2.BackgroundImage.Height),
+                GraphicsUnit.Pixel);
+
+            e.Graphics.DrawImage(player.PlayerImg, player.X, player.Y, player.Size, player.Size);
         }
 
 
@@ -63,6 +80,7 @@ namespace игра
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
+            /*
             int speed = 8;
             backGround1.Left -= speed;
             backGround2.Left -= speed;
@@ -71,35 +89,37 @@ namespace игра
                 backGround1.Left = 0;
                 backGround2.Left = backGround1.Right;
             }
+            */
         }
-
-        /*
-        private bool isJumping = false;
-        private int jumpSpeed = 15;
-        private int gravity = 8;
-        private int jumpHeight = 150;
-        private int initialTop;
-
-        private void JumpTimer_Tick(object sender, EventArgs e)
-        {
-            if (isJumping)
-            {
-                player.Top -= jumpSpeed;
-                if (player.Top <= initialTop - jumpHeight)
-                {
-                    isJumping = false;
-                }
-            }
-            else if (player.Top < initialTop)
-            {
-                player.Top += gravity;
-                if (player.Top > initialTop)
-                {
-                    player.Top = initialTop;
-                }
-            }
-        }
-        }
-        */
     }
 }
+
+        /*
+              private bool isJumping = false;
+              private int jumpSpeed = 15;
+              private int gravity = 8;
+              private int jumpHeight = 150;
+              private int initialTop;
+
+private void JumpTimer_Tick(object sender, EventArgs e)
+{
+   if (isJumping)
+   {
+       player.Top -= jumpSpeed;
+       if (player.Top <= initialTop - jumpHeight)
+       {
+           isJumping = false;
+       }
+   }
+   else if (player.Top < initialTop)
+   {
+       player.Top += gravity;
+       if (player.Top > initialTop)
+       {
+           player.Top = initialTop;
+       }
+   }
+}
+}
+*/
+    

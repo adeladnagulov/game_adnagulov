@@ -8,17 +8,17 @@ namespace игра
 {
     internal class Player
     {
-        public int x;
-        public int y;
-        public int size;
-        public Image playerImg;
+        public int X;
+        public int Y;
+        public int Size;
+        public Image PlayerImg;
 
         public Player(int x, int y)
         {
-            playerImg = new Bitmap("C:\\Users\\adela\\OneDrive\\Desktop\\работы\\С шарп\\игра\\игра\\player.png");
-            this.x = x;
-            this.y = y;
-            size = 50;
+            PlayerImg = new Bitmap("C:\\Users\\adela\\OneDrive\\Desktop\\работы\\С шарп\\игра\\игра\\player.png");
+            this.X = x;
+            this.Y = y;
+            Size = 50;
         }
     }
 }
