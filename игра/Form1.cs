@@ -16,9 +16,11 @@ namespace игра
     public partial class Form1 : Form
     {
         private Player player;
+        private ThePeak peak;
         float gravity;
         private Background bg1;
         private Background bg2;
+
         private readonly Timer GameTimer = new Timer();
         private readonly Timer BackgroundTimer = new Timer();
 
@@ -36,6 +38,7 @@ namespace игра
             bg1 = new Background(0, 0);
             bg2 = new Background(bg1.Width, 0);
             player = new Player(77, 355);
+            peak = new ThePeak(250, 465);
 
             gravity = 0;
 
@@ -75,19 +78,22 @@ namespace игра
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(
+            Graphics g = e.Graphics;
+            g.DrawImage(
                 bg1.BackgroundImage,
                 new Rectangle(bg1.X, bg1.Y, bg1.Width, bg1.Height),
                 new Rectangle(0, 0, bg1.BackgroundImage.Width, bg1.BackgroundImage.Height),
                 GraphicsUnit.Pixel);
 
-            e.Graphics.DrawImage(
+            g.DrawImage(
                 bg2.BackgroundImage,
                 new Rectangle(bg2.X, bg2.Y, bg2.Width, bg2.Height),
                 new Rectangle(0, 0, bg2.BackgroundImage.Width, bg2.BackgroundImage.Height),
                 GraphicsUnit.Pixel);
 
-            e.Graphics.DrawImage(player.PlayerImg, player.X, player.Y, player.Size, player.Size);
+            g.DrawImage(player.PlayerImg, player.X, player.Y, player.Size, player.Size);
+
+            g.DrawImage(peak.PeakImg, peak.X, peak.Y, peak.Size, peak.Size);
         }
 
 
