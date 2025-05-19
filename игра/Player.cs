@@ -13,6 +13,9 @@ namespace игра
         public int Size;
         public Image PlayerImg;
         public float GravityValue;
+        public float JumpSpeed;
+        public float FallSpeed;
+        public bool IsJumping;
 
         public Player(int x, int y)
         {
@@ -20,7 +23,10 @@ namespace игра
             this.X = x;
             this.Y = y;
             Size = 60;
-            GravityValue = 0.2f;
+            GravityValue = 0.1f;
+            IsJumping = false;
+            JumpSpeed = 0;
+            FallSpeed = 0;
         }
     }
 }

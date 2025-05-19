@@ -17,7 +17,7 @@ namespace игра
     {
         private Player player;
         private ThePeak peak;
-        float gravity;
+        private float floor;
         private Background bg1;
         private Background bg2;
 
@@ -40,18 +40,44 @@ namespace игра
             player = new Player(77, 355);
             peak = new ThePeak(250, 465);
 
-            gravity = 0;
+            floor = 455f;
 
-            timer1.Interval = 15;
-            timer1.Tick += new EventHandler(update);
-            timer1.Start();
+            backgroundTimer.Interval = 15;
+            backgroundTimer.Tick += new EventHandler(Go);
+            backgroundTimer.Start();
 
-            timer2.Interval = 15;
-            timer2.Tick += new EventHandler(go);
-            timer2.Start();
+            jumpTimer.Interval = 15;
+            jumpTimer.Tick += new EventHandler(Jump);
+            jumpTimer.Start();
         }
 
-        private void go(object sender, EventArgs e)
+        private void Jump(object sender, EventArgs e)
+        {
+            if (player.IsJumping)
+            {
+                player.Y -= player.JumpSpeed;
+                player.JumpSpeed -= player.GravityValue;
+
+                if (player.JumpSpeed <= 0)
+                {
+                    player.IsJumping = false;
+                    player.FallSpeed = 0;
+                }
+            }
+            else if (player.Y < floor)
+            {
+                player.FallSpeed += player.GravityValue;
+                player.Y += player.FallSpeed;
+
+                if (player.Y >= floor)
+                {
+                    player.Y = floor;
+                    player.FallSpeed = 0;
+                }
+            }
+        }
+
+        private void Go(object sender, EventArgs e)
         {
             int speed = 8;
             bg1.X -= speed;
@@ -63,17 +89,6 @@ namespace игра
             }
 
             Invalidate();
-        }
-
-        private void update(object sender, EventArgs e)
-        {
-            if (player.Y < 455)
-            {
-                gravity += player.GravityValue;
-                player.Y += gravity;
-
-                Invalidate(); 
-            }
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
@@ -96,7 +111,6 @@ namespace игра
             g.DrawImage(peak.PeakImg, peak.X, peak.Y, peak.Size, peak.Size);
         }
 
-
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Escape)
@@ -104,40 +118,12 @@ namespace игра
                 this.Close();
             }
 
-            //if (e.KeyChar == (char)Keys.Space && !isJumping && player.Top == initialTop)
-            //{
-            //   isJumping = true;
-            //}
+            if (e.KeyChar == (char)Keys.Space && !player.IsJumping && player.Y >= floor)
+            {
+                player.IsJumping = true;
+                player.JumpSpeed = 5f;
+            }
         }
     }
 }
-
-        /*
-              private bool isJumping = false;
-              private int jumpSpeed = 15;
-              private int gravity = 8;
-              private int jumpHeight = 150;
-              private int initialTop;
-
-private void JumpTimer_Tick(object sender, EventArgs e)
-{
-   if (isJumping)
-   {
-       player.Top -= jumpSpeed;
-       if (player.Top <= initialTop - jumpHeight)
-       {
-           isJumping = false;
-       }
-   }
-   else if (player.Top < initialTop)
-   {
-       player.Top += gravity;
-       if (player.Top > initialTop)
-       {
-           player.Top = initialTop;
-       }
-   }
-}
-}
-*/
     

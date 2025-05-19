@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.gravityTimer = new System.Windows.Forms.Timer(this.components);
+            this.backgroundTimer = new System.Windows.Forms.Timer(this.components);
+            this.jumpTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // Form1
@@ -53,8 +54,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Timer gravityTimer;
+        private System.Windows.Forms.Timer backgroundTimer;
+        private System.Windows.Forms.Timer jumpTimer;
     }
 }
 
