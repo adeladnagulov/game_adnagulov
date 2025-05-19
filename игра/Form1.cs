@@ -16,7 +16,7 @@ namespace игра
     public partial class Form1 : Form
     {
         private Player player;
-        int gravity;
+        float gravity;
         private Background bg1;
         private Background bg2;
         private readonly Timer GameTimer = new Timer();
@@ -46,7 +46,9 @@ namespace игра
             bg2 = new Background(this.ClientSize.Width, 0, this.ClientSize.Width, this.ClientSize.Height, bgPath);
             player = new Player(77, 355);
 
-            timer1.Interval = 30;
+            gravity = 0;
+
+            timer1.Interval = 15;
             timer1.Tick += new EventHandler(update);
             timer1.Start();
         }
@@ -55,7 +57,8 @@ namespace игра
         {
             if (player.Y < 455)
             {
-                player.Y += player.GravityValue;
+                gravity += player.GravityValue;
+                player.Y += gravity;
                 Invalidate(); 
             }
         }

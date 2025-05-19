@@ -8,11 +8,11 @@ namespace игра
 {
     internal class Player
     {
-        public int X;
-        public int Y;
+        public float X;
+        public float Y;
         public int Size;
         public Image PlayerImg;
-        public int GravityValue;
+        public float GravityValue;
 
         public Player(int x, int y)
         {
@@ -20,7 +20,7 @@ namespace игра
             this.X = x;
             this.Y = y;
             Size = 60;
-            GravityValue = 4;
+            GravityValue = 0.2f;
         }
     }
 }
