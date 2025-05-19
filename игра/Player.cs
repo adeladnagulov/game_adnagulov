@@ -12,13 +12,15 @@ namespace игра
         public int Y;
         public int Size;
         public Image PlayerImg;
+        public int GravityValue;
 
         public Player(int x, int y)
         {
             PlayerImg = new Bitmap("C:\\Users\\adela\\OneDrive\\Desktop\\работы\\С шарп\\игра\\игра\\player.png");
             this.X = x;
             this.Y = y;
-            Size = 50;
+            Size = 60;
+            GravityValue = 4;
         }
     }
 }

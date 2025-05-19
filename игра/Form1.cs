@@ -16,8 +16,10 @@ namespace игра
     public partial class Form1 : Form
     {
         private Player player;
+        int gravity;
         private Background bg1;
         private Background bg2;
+        private readonly Timer GameTimer = new Timer();
 
         public Form1()
         {
@@ -42,9 +44,21 @@ namespace игра
 
             bg1 = new Background(0, 0, this.ClientSize.Width, this.ClientSize.Height, bgPath);
             bg2 = new Background(this.ClientSize.Width, 0, this.ClientSize.Width, this.ClientSize.Height, bgPath);
-            player = new Player(77, 375);
+            player = new Player(77, 355);
+
+            timer1.Interval = 30;
+            timer1.Tick += new EventHandler(update);
+            timer1.Start();
         }
 
+        private void update(object sender, EventArgs e)
+        {
+            if (player.Y < 455)
+            {
+                player.Y += player.GravityValue;
+                Invalidate(); 
+            }
+        }
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
@@ -63,7 +77,19 @@ namespace игра
             e.Graphics.DrawImage(player.PlayerImg, player.X, player.Y, player.Size, player.Size);
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            int speed = 8;
+            bg1.X -= speed;
+            bg2.X -= speed;
+            if (bg1.X <= bg1.Width)
+            {
+                bg1.X = 0;
+                bg2.X = bg1.Width;
+            }
 
+            Invalidate();
+        }
 
 
 
@@ -78,19 +104,6 @@ namespace игра
             //{
             //   isJumping = true;
             //}
-        }
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            /*
-            int speed = 8;
-            backGround1.Left -= speed;
-            backGround2.Left -= speed;
-            if (backGround2.Left <= 0)
-            {
-                backGround1.Left = 0;
-                backGround2.Left = backGround1.Right;
-            }
-            */
         }
     }
 }
