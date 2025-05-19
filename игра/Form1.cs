@@ -33,10 +33,8 @@ namespace игра
 
         public void Init()
         {
-            string bgPath = "C:\\Users\\adela\\OneDrive\\Desktop\\работы\\С шарп\\игра\\игра\\background.jpg";
-
-            bg1 = new Background(0, 0, this.ClientSize.Width, this.ClientSize.Height, bgPath);
-            bg2 = new Background(this.ClientSize.Width, 0, this.ClientSize.Width, this.ClientSize.Height, bgPath);
+            bg1 = new Background(0, 0);
+            bg2 = new Background(bg1.Width, 0);
             player = new Player(77, 355);
 
             gravity = 0;
@@ -70,6 +68,7 @@ namespace игра
             {
                 gravity += player.GravityValue;
                 player.Y += gravity;
+
                 Invalidate(); 
             }
         }

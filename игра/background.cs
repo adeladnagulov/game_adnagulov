@@ -10,19 +10,19 @@ namespace игра
 {
     internal class Background
     {
-        public Image BackgroundImage { get; }
-        public int X { get; set; }
-        public int Y { get; set; }
-        public int Width { get; }
-        public int Height { get; }
+        public Image BackgroundImage;
+        public int X;
+        public int Y;
+        public int Width;
+        public int Height;
 
-        public Background(int x, int y, int width, int height, string imagePath)
+        public Background(int x, int y)
         {
-            BackgroundImage = Image.FromFile(imagePath);
-            X = x;
-            Y = y;
-            Width = width;
-            Height = height;
+            BackgroundImage = Image.FromFile("C:\\Users\\adela\\OneDrive\\Desktop\\работы\\С шарп\\игра\\игра\\background.jpg");
+            this.X = x;
+            this.Y = y;
+            Width = 800;
+            Height = 600;
         }
     }
 }
