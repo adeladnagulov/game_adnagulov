@@ -20,6 +20,7 @@ namespace игра
         private Background bg1;
         private Background bg2;
         private readonly Timer GameTimer = new Timer();
+        private readonly Timer BackgroundTimer = new Timer();
 
         public Form1()
         {
@@ -28,14 +29,6 @@ namespace игра
             this.ClientSize = new Size(800, 600);
             Init();
             Invalidate();
-
-            /*
-            initialTop = player.Top;
-            Timer jumpTimer = new Timer();
-            jumpTimer.Interval = 20;
-            jumpTimer.Tick += JumpTimer_Tick;
-            jumpTimer.Start();
-            */
         }
 
         public void Init()
@@ -51,6 +44,24 @@ namespace игра
             timer1.Interval = 15;
             timer1.Tick += new EventHandler(update);
             timer1.Start();
+
+            timer2.Interval = 15;
+            timer2.Tick += new EventHandler(go);
+            timer2.Start();
+        }
+
+        private void go(object sender, EventArgs e)
+        {
+            int speed = 8;
+            bg1.X -= speed;
+            bg2.X -= speed;
+            if (bg1.X <= -bg1.Width)
+            {
+                bg1.X = 0;
+                bg2.X = bg1.Width;
+            }
+
+            Invalidate();
         }
 
         private void update(object sender, EventArgs e)
@@ -79,21 +90,6 @@ namespace игра
 
             e.Graphics.DrawImage(player.PlayerImg, player.X, player.Y, player.Size, player.Size);
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            int speed = 8;
-            bg1.X -= speed;
-            bg2.X -= speed;
-            if (bg1.X <= bg1.Width)
-            {
-                bg1.X = 0;
-                bg2.X = bg1.Width;
-            }
-
-            Invalidate();
-        }
-
 
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
