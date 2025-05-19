@@ -45,6 +45,7 @@ namespace игра
             player = new Player(77, 375);
         }
 
+
         private void OnPaint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawImage(
