@@ -14,6 +14,8 @@ namespace игра
         [STAThread]
         static void Main()
         {
+            var menu = new Menu();
+            Application.Run(menu);
             var controller = new GameController();
             Application.Run(controller.Vieb);
         }
