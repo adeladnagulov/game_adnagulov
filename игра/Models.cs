@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 namespace игра
 {
-    internal class Player
+    public class Player
     {
         public float X;
         public float Y;
@@ -30,7 +30,7 @@ namespace игра
         }
     }
 
-    internal class Background
+    public class Background
     {
         public Image BackgroundImage;
         public int X;
@@ -48,7 +48,7 @@ namespace игра
         }
     }
 
-    internal class ThePeak
+    public class ThePeak
     {
         public float X;
         public float Y;

@@ -1,6 +1,6 @@
 ﻿namespace игра
 {
-    partial class Form1
+    partial class GameView
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,13 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.gravityTimer = new System.Windows.Forms.Timer(this.components);
-            this.backgroundTimer = new System.Windows.Forms.Timer(this.components);
-            this.jumpTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // Form1
+            // GameView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -43,20 +39,15 @@
             this.ClientSize = new System.Drawing.Size(512, 512);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Form1";
+            this.Name = "GameView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Form1";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Timer gravityTimer;
-        private System.Windows.Forms.Timer backgroundTimer;
-        private System.Windows.Forms.Timer jumpTimer;
     }
 }
 
