@@ -16,6 +16,7 @@ namespace игра
         public float JumpSpeed;
         public float FallSpeed;
         public bool IsJumping;
+        public bool IsAlive;
 
         public Player(int x, int y)
         {
@@ -27,6 +28,7 @@ namespace игра
             IsJumping = false;
             JumpSpeed = 0;
             FallSpeed = 0;
+            IsAlive = true;
         }
     }
 

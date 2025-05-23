@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -18,13 +19,13 @@ namespace игра
         private Background Bg2;
         private float floor;
         private Timer GameTimer;
-        private int BackgroundSpeed = 8;
+        private int BackgroundSpeed = 5;
         public GameController()
         {
             Bg1 = new Background(0, 0);
             Bg2 = new Background(Bg1.Width, 0);
             Player = new Player(77, 355);
-            Peak = new ThePeak(250, 465);
+            Peak = new ThePeak(950, 465);
             floor = 455f;
 
             GameTimer = new Timer();
@@ -40,9 +41,13 @@ namespace игра
 
         private void OnTimerTick(object sender, EventArgs e)
         {
-            Jump();
-            BackgroundMovement();
-            Vieb.Draw(Player, Bg1, Bg2, Peak);
+            if (Player.IsAlive)
+            {
+                Jump();
+                BackgroundMovement();
+                MovePeak();
+                Vieb.Draw(Player, Bg1, Bg2, Peak);   
+            }
         }
 
         private void SpasePress(object sender, KeyPressEventArgs e)
@@ -50,7 +55,7 @@ namespace игра
             if (e.KeyChar == (char)Keys.Space && !Player.IsJumping && Player.Y >= floor)
             {
                 Player.IsJumping = true;
-                Player.JumpSpeed = 5f;
+                Player.JumpSpeed = 4f;
             }
 
             if (e.KeyChar == (char)Keys.Escape)
@@ -93,6 +98,36 @@ namespace игра
             {
                 Bg1.X = 0;
                 Bg2.X = Bg1.Width;
+            }
+        }
+
+        private void MovePeak()
+        {
+            Peak.X -= BackgroundSpeed;
+            CreateNewPeak();
+            if (Collide(Player, Peak))
+            { 
+                Player.IsAlive = false;
+            }
+        }
+
+        private bool Collide(Player player, ThePeak peak)
+        {
+            var delta = new PointF();
+            delta.X = player.X - peak.X;
+            delta.Y = player.Y - peak.Y;
+            if(Math.Abs(delta.X) <= player.Size/2 + peak.Size/2 && Math.Abs(delta.Y) <= player.Size / 2 + peak.Size / 2)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void CreateNewPeak()
+        {
+            if (Peak.X < Player.X - 500)
+            {
+                Peak = new ThePeak((int)(Player.X + 1000), 465);
             }
         }
     }
