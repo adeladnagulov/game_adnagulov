@@ -26,7 +26,7 @@ namespace игра
                     {
                         Application.Run(game.Vieb);
                         if (!game.Player.IsAlive)
-                            restart = new LossMenu().ShowDialog() == DialogResult.OK;
+                            restart = new LossMenu(game.Score.FinalValue).ShowDialog() == DialogResult.OK;
                     }
                 } while (restart);
             }

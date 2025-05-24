@@ -19,6 +19,8 @@ namespace игра
         private Background Bg2;
         private float floor;
         private Timer GameTimer;
+        private Timer ScoreTimer;
+        public Score Score;
         private int BackgroundSpeed = 5;
         public GameController()
         {
@@ -26,6 +28,7 @@ namespace игра
             Bg2 = new Background(Bg1.Width, 0);
             Player = new Player(77, 355);
             Peak = new ThePeak(950, 465);
+            Score = new Score(0);  
             floor = 455f;
 
             GameTimer = new Timer();
@@ -33,10 +36,15 @@ namespace игра
             GameTimer.Tick += new EventHandler(OnTimerTick);
             GameTimer.Start();
 
+            ScoreTimer = new Timer();
+            ScoreTimer.Interval = 100;
+            ScoreTimer.Tick += (s, e) => Score.Value++;
+            ScoreTimer.Start();
+
             Vieb = new GameView();
             Vieb.KeyPress += SpasePress;
 
-            Vieb.Draw(Player, Bg1, Bg2, Peak);
+            Vieb.Draw(Player, Bg1, Bg2, Peak, Score);
         }
 
         private void OnTimerTick(object sender, EventArgs e)
@@ -46,7 +54,7 @@ namespace игра
                 Jump();
                 BackgroundMovement();
                 MovePeak();
-                Vieb.Draw(Player, Bg1, Bg2, Peak);
+                Vieb.Draw(Player, Bg1, Bg2, Peak, Score);
             }
             else
             {
@@ -122,7 +130,9 @@ namespace игра
             delta.Y = player.Y - peak.Y;
             if(Math.Abs(delta.X) <= player.Size/2 + peak.Size/2 && Math.Abs(delta.Y) <= player.Size / 2 + peak.Size / 2)
             {
-                return true;
+                Score.FinalValue = Score.Value;
+                Score.Value = 0;
+                return true;    
             }
             return false;
         }

@@ -18,6 +18,7 @@ namespace игра
         private Player _player;
         private Background _bg1, _bg2;
         private ThePeak _peak;
+        private Score _score;
 
         public GameView()
         {
@@ -26,12 +27,13 @@ namespace игра
             this.ClientSize = new Size(800, 600);
         }
 
-        public void Draw(Player player, Background bg1, Background bg2, ThePeak peak) 
+        public void Draw(Player player, Background bg1, Background bg2, ThePeak peak, Score score) 
         {
             _player = player;
             _bg1 = bg1;
             _bg2 = bg2;
             _peak = peak;
+            _score = score;
             Invalidate();
         }
 
@@ -55,6 +57,8 @@ namespace игра
                 g.DrawImage(_player.PlayerImg, _player.X, _player.Y, _player.Size, _player.Size);
 
                 g.DrawImage(_peak.PeakImg, _peak.X, _peak.Y, _peak.Size, _peak.Size);
+
+                g.DrawString($"Счёт: {_score.Value}", new Font("Arial", 16), Brushes.White, 10, 10);
             }
         }
     }
@@ -64,5 +68,4 @@ namespace игра
  * 2.2 бесконечный уровень
  * 3 блоки
  * 4 ракета
- * 6 счетчик
  */

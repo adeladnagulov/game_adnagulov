@@ -65,4 +65,16 @@ namespace игра
             Size = 50;
         }
     }
+
+    public class Score
+    {
+        public int Value;
+        public int FinalValue;
+
+        public Score(int value)
+        {
+            Value = value;
+            FinalValue = 0;
+        }
+    }
 }
