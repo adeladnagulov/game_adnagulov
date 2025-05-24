@@ -8,16 +8,28 @@ namespace игра
 {
     internal static class Program
     {
-        /// <summary>
-        /// Главная точка входа для приложения.
-        /// </summary>
+        
         [STAThread]
         static void Main()
         {
-            var menu = new Menu();
-            Application.Run(menu);
-            var controller = new GameController();
-            Application.Run(controller.Vieb);
+            while (true)
+            {
+                if (new Menu().ShowDialog() != DialogResult.OK)
+                    break;
+
+                bool restart;
+                do
+                {
+                    restart = false;
+                    var game = new GameController();
+                    using (game.Vieb)
+                    {
+                        Application.Run(game.Vieb);
+                        if (!game.Player.IsAlive)
+                            restart = new LossMenu().ShowDialog() == DialogResult.OK;
+                    }
+                } while (restart);
+            }
         }
     }
 }

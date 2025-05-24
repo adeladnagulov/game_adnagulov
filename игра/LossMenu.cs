@@ -10,22 +10,21 @@ using System.Windows.Forms;
 
 namespace игра
 {
-    public partial class Menu : Form
+    public partial class LossMenu : Form
     {
-        public int SelectedLevel = 1;
-        public Menu()
+        public LossMenu()
         {
             this.ClientSize = new Size(800, 600);
             InitializeComponent();
         }
 
-        private void ClickStart(object sender, EventArgs e)
+        private void ClickRepeat(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
-        private void ClickExit(object sender, EventArgs e)
+        private void ClickGoMenu(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();

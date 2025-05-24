@@ -13,7 +13,7 @@ namespace игра
     public class GameController
     {
         public GameView Vieb;
-        private Player Player;
+        public Player Player;
         private ThePeak Peak;
         private Background Bg1;
         private Background Bg2;
@@ -46,7 +46,11 @@ namespace игра
                 Jump();
                 BackgroundMovement();
                 MovePeak();
-                Vieb.Draw(Player, Bg1, Bg2, Peak);   
+                Vieb.Draw(Player, Bg1, Bg2, Peak);
+            }
+            else
+            {
+                Vieb.Close();
             }
         }
 
