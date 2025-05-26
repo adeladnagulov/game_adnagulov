@@ -20,7 +20,7 @@ namespace игра
 
         public Player(int x, int y)
         {
-            PlayerImg = new Bitmap("C:\\Users\\adela\\OneDrive\\Desktop\\работы\\С шарп\\игра\\игра\\player.png");
+            PlayerImg = new Bitmap("player.png");
             this.X = x;
             this.Y = y;
             Size = 60;
@@ -42,7 +42,7 @@ namespace игра
 
         public Background(int x, int y)
         {
-            BackgroundImage = Image.FromFile("C:\\Users\\adela\\OneDrive\\Desktop\\работы\\С шарп\\игра\\игра\\background.jpg");
+            BackgroundImage = Image.FromFile("background.jpg");
             this.X = x;
             this.Y = y;
             Width = 800;
@@ -59,14 +59,14 @@ namespace игра
 
         public ThePeak(int x, int y)
         {
-            PeakImg = new Bitmap("C:\\Users\\adela\\OneDrive\\Desktop\\работы\\С шарп\\игра\\игра\\R.png");
-            this.X = x;
+            PeakImg = new Bitmap("Peak.png");
+            this.X = x; 
             this.Y = y;
             Size = 50;
         }
     }
 
-    public class Score
+    public class Score 
     {
         public int Value;
         public int FinalValue;
