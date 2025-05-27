@@ -14,7 +14,10 @@ namespace игра
     {
         public GameView Vieb;
         public Player Player;
-        private ThePeak Peak;
+        private ThePeak Peak1;
+        private ThePeak Peak2;
+        private ThePeak DoublePeak1;
+        private ThePeak DoublePeak2;
         private Background Bg1;
         private Background Bg2;
         private float floor;
@@ -27,7 +30,10 @@ namespace игра
             Bg1 = new Background(0, 0);
             Bg2 = new Background(Bg1.Width, 0);
             Player = new Player(77, 355);
-            Peak = new ThePeak(950, 465);
+            Peak1 = new ThePeak(950, 465);
+            Peak2 = new ThePeak(2400, 465);
+            DoublePeak1 = new ThePeak(1650, 465);
+            DoublePeak2 = new ThePeak(1700, 465);
             Score = new Score(0);  
             floor = 455f;
 
@@ -37,14 +43,14 @@ namespace игра
             GameTimer.Start();
 
             ScoreTimer = new Timer();
-            ScoreTimer.Interval = 100;
+            ScoreTimer.Interval = 300;
             ScoreTimer.Tick += (s, e) => Score.Value++;
             ScoreTimer.Start();
 
             Vieb = new GameView();
             Vieb.KeyPress += SpasePress;
 
-            Vieb.Draw(Player, Bg1, Bg2, Peak, Score);
+            Vieb.Draw(Player, Bg1, Bg2, Peak1, Peak2, Score, DoublePeak1, DoublePeak2);
         }
 
         private void OnTimerTick(object sender, EventArgs e)
@@ -54,7 +60,7 @@ namespace игра
                 Jump();
                 BackgroundMovement();
                 MovePeak();
-                Vieb.Draw(Player, Bg1, Bg2, Peak, Score);
+                Vieb.Draw(Player, Bg1, Bg2, Peak1, Peak2, Score, DoublePeak1, DoublePeak2);
             }
             else
             {
@@ -115,9 +121,12 @@ namespace игра
 
         private void MovePeak()
         {
-            Peak.X -= BackgroundSpeed;
+            Peak1.X -= BackgroundSpeed;
+            DoublePeak1.X -= BackgroundSpeed;
+            DoublePeak2.X -= BackgroundSpeed;
+            Peak2.X -= BackgroundSpeed;
             CreateNewPeak();
-            if (Collide(Player, Peak))
+            if (Collide(Player, Peak1) || Collide(Player, DoublePeak1) || Collide(Player, DoublePeak2) || Collide(Player, Peak2))
             { 
                 Player.IsAlive = false;
             }
@@ -139,9 +148,25 @@ namespace игра
 
         private void CreateNewPeak()
         {
-            if (Peak.X < Player.X - 500)
+            Random rnd = new Random();
+            if (Peak1.X < Player.X - 800)
             {
-                Peak = new ThePeak((int)(Player.X + 1000), 465);
+                Peak1 = new ThePeak((int)(Player.X + 1000 + rnd.Next(-300, 300)), 465);
+            }
+
+            if (DoublePeak1.X < Player.X - 800)
+            {
+                DoublePeak1 = new ThePeak((int)(Player.X + 1000), 465);
+            }
+
+            if (DoublePeak2.X < Player.X - 800)
+            {
+                DoublePeak2 = new ThePeak((int)(Player.X + 1000), 465);
+            }
+
+            if (Peak2.X < Player.X - 800) 
+            {
+                Peak2 = new ThePeak((int)(Player.X + 1000 + rnd.Next(-300, 300)), 465);
             }
         }
     }
