@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer;
 
@@ -18,13 +13,13 @@ namespace игра
         private ThePeak Peak2;
         private ThePeak DoublePeak1;
         private ThePeak DoublePeak2;
-        private Background Bg1;
-        private Background Bg2;
-        private float floor;
-        private Timer GameTimer;
-        private Timer ScoreTimer;
+        private readonly Background Bg1;
+        private readonly Background Bg2;
+        private readonly float floor;
+        private readonly Timer GameTimer;
+        private readonly Timer ScoreTimer;
         public Score Score;
-        private int BackgroundSpeed = 5;
+        private readonly int BackgroundSpeed = 5;
         public GameController()
         {
             Bg1 = new Background(0, 0);
@@ -37,13 +32,19 @@ namespace игра
             Score = new Score(0);  
             floor = 455f;
 
-            GameTimer = new Timer();
-            GameTimer.Interval = 15;
+            GameTimer = new Timer
+            {
+                Interval = 15
+            };
+
             GameTimer.Tick += new EventHandler(OnTimerTick);
             GameTimer.Start();
 
-            ScoreTimer = new Timer();
-            ScoreTimer.Interval = 300;
+            ScoreTimer = new Timer
+            {
+                Interval = 300
+            };
+
             ScoreTimer.Tick += (s, e) => Score.Value++;
             ScoreTimer.Start();
 
@@ -134,16 +135,19 @@ namespace игра
 
         private bool Collide(Player player, ThePeak peak)
         {
-            var delta = new PointF();
-            delta.X = player.X - peak.X;
-            delta.Y = player.Y - peak.Y;
-            if(Math.Abs(delta.X) <= player.Size/2 + peak.Size/2 && Math.Abs(delta.Y) <= player.Size / 2 + peak.Size / 2)
+            var delta = new PointF
+            {
+                X = player.X - peak.X,
+                Y = player.Y - peak.Y
+            };
+
+            if (Math.Abs(delta.X) <= player.Size/2 + peak.Size/2 && Math.Abs(delta.Y) <= player.Size / 2 + peak.Size / 2)
             {
                 Score.FinalValue = Score.Value;
                 Score.Value = 0;
                 return true;    
             }
-            return false;
+            return false; 
         }
 
         private void CreateNewPeak()

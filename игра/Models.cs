@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
+
 namespace игра
 {
     public class Player
@@ -11,7 +7,7 @@ namespace игра
         public float X;
         public float Y;
         public int Size;
-        public Image PlayerImg;
+         public Image PlayerImg;
         public float GravityValue;
         public float JumpSpeed;
         public float FallSpeed;
@@ -31,7 +27,7 @@ namespace игра
             IsAlive = true;
         }
     }
-
+                
     public class Background
     {
         public Image BackgroundImage;
